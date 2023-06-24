@@ -1,7 +1,5 @@
 import Image from "next/image";
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
-  );
+  return <main>누구나 올수 있는 페이지입니다</main>;
 }
