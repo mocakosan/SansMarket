@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
+        //이메일이나 페스워드가 없으면
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid credentails");
         }
@@ -33,9 +33,11 @@ export const authOptions: NextAuthOptions = {
             email: credentials.email,
           },
         });
+        //유저가 없거나 패스워드가 없으면
         if (!user || !user?.hashedPassword) {
           throw new Error("Invalid credentails");
         }
+        //password랑 user.password가 true이면 user 리턴
         const isCorrectPassword = await bcrypt.compare(
           credentials.password,
           user.hashedPassword
